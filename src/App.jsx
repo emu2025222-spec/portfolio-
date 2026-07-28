@@ -17,16 +17,31 @@ function App() {
       <ParticlesBackground />
 
       <div className="relative z-10">
-        <Experience />
         <Navbar />
+
+        {/* Hero Section */}
         <Hero />
+
+        {/* About */}
         <About />
+
+        {/* Skills */}
         <Skills />
+
+        {/* Experience */}
+        <Experience />
+
+        {/* Projects */}
         <Projects />
+
+        {/* Education */}
         <Education />
+
+        {/* Contact */}
         <Contact />
-        <ScrollProgress />
+
         <Footer />
+        <ScrollProgress />
         <BackToTop />
       </div>
     </div>
