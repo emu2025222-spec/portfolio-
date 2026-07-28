@@ -1,12 +1,212 @@
-@import "tailwindcss";
+/* ========================= */
+/* PREMIUM ANIMATIONS */
+/* ========================= */
 
-html {
-  scroll-behavior: smooth;
+html{
+  scroll-behavior:smooth;
 }
 
-body {
-  margin: 0;
-  background: #020617;
-  color: white;
-  font-family: "Poppins", sans-serif;
+body{
+  overflow-x:hidden;
+}
+
+/* Floating */
+
+@keyframes floating{
+0%{
+transform:translateY(0px);
+}
+50%{
+transform:translateY(-18px);
+}
+100%{
+transform:translateY(0px);
+}
+}
+
+.float{
+animation:floating 4s ease-in-out infinite;
+}
+
+/* Fade Up */
+
+@keyframes fadeUp{
+
+0%{
+opacity:0;
+transform:translateY(70px);
+}
+
+100%{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+.fade-up{
+animation:fadeUp 1s ease forwards;
+}
+
+/* Zoom */
+
+@keyframes zoomIn{
+
+0%{
+opacity:0;
+transform:scale(.7);
+}
+
+100%{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+.zoom{
+animation:zoomIn .9s ease;
+}
+
+/* Glow */
+
+.glow{
+
+box-shadow:
+0 0 20px #06b6d4,
+0 0 40px #06b6d4,
+0 0 80px #06b6d4;
+
+}
+
+/* Card */
+
+.card{
+
+transition:.5s;
+
+}
+
+.card:hover{
+
+transform:
+translateY(-15px)
+scale(1.03);
+
+box-shadow:
+0 0 35px #06b6d4;
+
+}
+
+/* Image */
+
+.profile{
+
+transition:.5s;
+animation:floating 5s ease infinite;
+
+}
+
+.profile:hover{
+
+transform:scale(1.08);
+
+}
+
+/* Button */
+
+.btn{
+
+transition:.4s;
+
+}
+
+.btn:hover{
+
+transform:translateY(-5px);
+
+box-shadow:
+0 0 25px cyan;
+
+}
+
+/* Text */
+
+.title{
+
+background:linear-gradient(
+90deg,
+#06b6d4,
+white,
+#06b6d4
+);
+
+background-size:200%;
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+animation:text 5s linear infinite;
+
+}
+
+@keyframes text{
+
+0%{
+background-position:0%;
+}
+
+100%{
+background-position:200%;
+}
+
+}
+
+/* Glass */
+
+.glass{
+
+background:rgba(255,255,255,.05);
+
+backdrop-filter:blur(15px);
+
+border:1px solid rgba(255,255,255,.1);
+
+}
+
+/* Hover Links */
+
+a{
+
+transition:.3s;
+
+}
+
+a:hover{
+
+color:#06b6d4;
+
+}
+
+/* Scroll */
+
+::-webkit-scrollbar{
+
+width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#06b6d4;
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#020617;
+
 }
