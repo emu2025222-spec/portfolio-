@@ -1,212 +1,209 @@
+@import "tailwindcss";
+
 /* ========================= */
-/* PREMIUM ANIMATIONS */
+/* GLOBAL */
 /* ========================= */
 
-html{
-  scroll-behavior:smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-body{
-  overflow-x:hidden;
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: #020617;
+  color: white;
+  font-family: "Poppins", sans-serif;
 }
 
-/* Floating */
+/* ========================= */
+/* FLOATING */
+/* ========================= */
 
-@keyframes floating{
-0%{
-transform:translateY(0px);
-}
-50%{
-transform:translateY(-18px);
-}
-100%{
-transform:translateY(0px);
-}
-}
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
 
-.float{
-animation:floating 4s ease-in-out infinite;
-}
+  50% {
+    transform: translateY(-18px);
+  }
 
-/* Fade Up */
-
-@keyframes fadeUp{
-
-0%{
-opacity:0;
-transform:translateY(70px);
+  100% {
+    transform: translateY(0);
+  }
 }
 
-100%{
-opacity:1;
-transform:translateY(0);
+.float {
+  animation: floating 5s ease-in-out infinite;
 }
 
+/* ========================= */
+/* FADE UP */
+/* ========================= */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.fade-up{
-animation:fadeUp 1s ease forwards;
+.fade-up {
+  animation: fadeUp 1s ease forwards;
 }
 
-/* Zoom */
+/* ========================= */
+/* ZOOM */
+/* ========================= */
 
-@keyframes zoomIn{
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(.8);
+  }
 
-0%{
-opacity:0;
-transform:scale(.7);
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-100%{
-opacity:1;
-transform:scale(1);
+.zoom {
+  animation: zoomIn .8s ease;
 }
 
+/* ========================= */
+/* GLOW */
+/* ========================= */
+
+.glow {
+  box-shadow: 0 0 20px #06b6d4,
+              0 0 40px #06b6d4;
 }
 
-.zoom{
-animation:zoomIn .9s ease;
+/* ========================= */
+/* CARD */
+/* ========================= */
+
+.card {
+  transition: .4s;
 }
 
-/* Glow */
+.card:hover {
+  transform: translateY(-12px) scale(1.03);
 
-.glow{
-
-box-shadow:
-0 0 20px #06b6d4,
-0 0 40px #06b6d4,
-0 0 80px #06b6d4;
-
+  box-shadow: 0 0 30px rgba(6,182,212,.5);
 }
 
-/* Card */
+/* ========================= */
+/* PROFILE */
+/* ========================= */
 
-.card{
-
-transition:.5s;
-
+.profile {
+  animation: floating 5s ease infinite;
+  transition: .4s;
 }
 
-.card:hover{
-
-transform:
-translateY(-15px)
-scale(1.03);
-
-box-shadow:
-0 0 35px #06b6d4;
-
+.profile:hover {
+  transform: scale(1.05);
 }
 
-/* Image */
+/* ========================= */
+/* BUTTON */
+/* ========================= */
 
-.profile{
-
-transition:.5s;
-animation:floating 5s ease infinite;
-
+.btn {
+  transition: .3s;
 }
 
-.profile:hover{
+.btn:hover {
+  transform: translateY(-5px);
 
-transform:scale(1.08);
-
+  box-shadow: 0 0 20px cyan;
 }
 
-/* Button */
+/* ========================= */
+/* TITLE */
+/* ========================= */
 
-.btn{
+.title {
+  background: linear-gradient(
+    90deg,
+    #06b6d4,
+    #ffffff,
+    #06b6d4
+  );
 
-transition:.4s;
+  background-size: 200% auto;
 
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  animation: textMove 5s linear infinite;
 }
 
-.btn:hover{
+@keyframes textMove {
+  from {
+    background-position: 0%;
+  }
 
-transform:translateY(-5px);
-
-box-shadow:
-0 0 25px cyan;
-
+  to {
+    background-position: 200%;
+  }
 }
 
-/* Text */
+/* ========================= */
+/* GLASS */
+/* ========================= */
 
-.title{
+.glass {
+  background: rgba(255,255,255,.05);
 
-background:linear-gradient(
-90deg,
-#06b6d4,
-white,
-#06b6d4
-);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 
-background-size:200%;
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-animation:text 5s linear infinite;
-
+  border: 1px solid rgba(255,255,255,.1);
 }
 
-@keyframes text{
+/* ========================= */
+/* LINKS */
+/* ========================= */
 
-0%{
-background-position:0%;
+a {
+  transition: .3s;
+  text-decoration: none;
 }
 
-100%{
-background-position:200%;
+a:hover {
+  color: #06b6d4;
 }
 
+/* ========================= */
+/* SCROLLBAR */
+/* ========================= */
+
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* Glass */
-
-.glass{
-
-background:rgba(255,255,255,.05);
-
-backdrop-filter:blur(15px);
-
-border:1px solid rgba(255,255,255,.1);
-
+::-webkit-scrollbar-track {
+  background: #020617;
 }
 
-/* Hover Links */
-
-a{
-
-transition:.3s;
-
+::-webkit-scrollbar-thumb {
+  background: #06b6d4;
+  border-radius: 50px;
 }
 
-a:hover{
-
-color:#06b6d4;
-
-}
-
-/* Scroll */
-
-::-webkit-scrollbar{
-
-width:8px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-background:#06b6d4;
-
-border-radius:20px;
-
-}
-
-::-webkit-scrollbar-track{
-
-background:#020617;
-
+::-webkit-scrollbar-thumb:hover {
+  background: #22d3ee;
 }
