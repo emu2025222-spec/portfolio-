@@ -1,55 +1,89 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import logo from "../assets/images/logo.png";
 
 function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const links = [
+    "Home",
+    "About",
+    "Skills",
+    "Projects",
+    "Education",
+    "Contact",
+  ];
 
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-500 ${
-        scrolled
-          ? "backdrop-blur-xl bg-slate-900/70 shadow-xl"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-8 py-5">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-        <h1 className="text-3xl font-extrabold">
-          <span className="text-white">&lt;</span>
+        {/* Logo */}
 
-          <span className="text-cyan-400">
-            REDEM
-          </span>
+        <a href="#home" className="flex items-center gap-3">
 
-          <span className="text-white">/&gt;</span>
-        </h1>
+          <img
+            src={logo}
+            alt="Logo"
+            className="w-12 h-12 rounded-full object-cover border-2 border-cyan-400 shadow-lg shadow-cyan-500/40 hover:rotate-12 hover:scale-110 duration-300"
+          />
 
-        <ul className="hidden md:flex gap-10 font-medium">
+          <div>
+            <h1 className="text-xl font-bold text-white">
+              MD. <span className="text-cyan-400">Sajedul</span>
+            </h1>
 
-          <li><a href="#home" className="hover:text-cyan-400 transition">Home</a></li>
+            <p className="text-xs text-gray-400">
+              Software Developer
+            </p>
+          </div>
 
-          <li><a href="#about" className="hover:text-cyan-400 transition">About</a></li>
+        </a>
 
-          <li><a href="#skills" className="hover:text-cyan-400 transition">Skills</a></li>
+        {/* Desktop Menu */}
 
-          <li><a href="#projects" className="hover:text-cyan-400 transition">Projects</a></li>
+        <div className="hidden md:flex gap-8">
 
-          <li><a href="#education" className="hover:text-cyan-400 transition">Education</a></li>
+          {links.map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="text-gray-300 hover:text-cyan-400 duration-300 font-medium"
+            >
+              {item}
+            </a>
+          ))}
 
-          <li><a href="#contact" className="hover:text-cyan-400 transition">Contact</a></li>
+        </div>
 
-        </ul>
+        {/* Mobile Button */}
 
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden text-2xl"
+        >
+          {open ? <FaTimes /> : <FaBars />}
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+
+      {open && (
+        <div className="md:hidden bg-slate-900 border-t border-slate-800">
+
+          {links.map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              onClick={() => setOpen(false)}
+              className="block px-6 py-4 hover:bg-slate-800 hover:text-cyan-400"
+            >
+              {item}
+            </a>
+          ))}
+
+        </div>
+      )}
     </nav>
   );
 }
