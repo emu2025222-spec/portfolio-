@@ -7,7 +7,7 @@ import {
   FaDownload,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-import profile from "../assets/images/profile.png";
+import profile from "../assets/images/Profile.png";
 
 function Hero() {
   return (
