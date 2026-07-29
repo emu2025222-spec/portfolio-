@@ -1,15 +1,17 @@
 import { motion } from "framer-motion";
+
 import {
   FaReact,
   FaNodeJs,
-  FaFlutter,
   FaHtml5,
   FaCss3Alt,
   FaJs,
   FaGitAlt,
   FaGithub,
 } from "react-icons/fa";
+
 import {
+  SiFlutter,
   SiExpress,
   SiMongodb,
   SiMysql,
@@ -18,7 +20,7 @@ import {
 
 const skills = [
   { name: "React", icon: <FaReact />, level: "95%" },
-  { name: "Flutter", icon: <FaFlutter />, level: "90%" },
+  { name: "Flutter", icon: <SiFlutter />, level: "90%" },
   { name: "Node.js", icon: <FaNodeJs />, level: "92%" },
   { name: "Express", icon: <SiExpress />, level: "90%" },
   { name: "MongoDB", icon: <SiMongodb />, level: "88%" },
@@ -33,12 +35,8 @@ const skills = [
 
 function Skills() {
   return (
-    <section
-      id="skills"
-      className="py-24 bg-slate-950"
-    >
+    <section id="skills" className="py-24 bg-slate-950">
       <div className="max-w-7xl mx-auto px-6">
-
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,7 +54,6 @@ function Skills() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-
           {skills.map((skill, index) => (
             <motion.div
               key={index}
@@ -66,32 +63,23 @@ function Skills() {
               }}
               className="bg-slate-800/70 backdrop-blur-xl rounded-3xl p-7 border border-slate-700 hover:border-cyan-400 transition"
             >
-              <div className="flex items-center justify-between">
-
-                <div className="flex items-center gap-4">
-
-                  <div className="text-4xl text-cyan-400">
-                    {skill.icon}
-                  </div>
-
-                  <div>
-
-                    <h3 className="text-xl font-bold">
-                      {skill.name}
-                    </h3>
-
-                    <p className="text-gray-400">
-                      {skill.level}
-                    </p>
-
-                  </div>
-
+              <div className="flex items-center gap-4">
+                <div className="text-4xl text-cyan-400">
+                  {skill.icon}
                 </div>
 
+                <div>
+                  <h3 className="text-xl font-bold">
+                    {skill.name}
+                  </h3>
+
+                  <p className="text-gray-400">
+                    {skill.level}
+                  </p>
+                </div>
               </div>
 
               <div className="w-full bg-slate-700 rounded-full h-3 mt-6">
-
                 <motion.div
                   initial={{ width: 0 }}
                   whileInView={{ width: skill.level }}
@@ -99,14 +87,10 @@ function Skills() {
                   viewport={{ once: true }}
                   className="bg-cyan-400 h-3 rounded-full"
                 />
-
               </div>
-
             </motion.div>
           ))}
-
         </div>
-
       </div>
     </section>
   );
