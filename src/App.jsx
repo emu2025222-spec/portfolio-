@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+
+import Loader from "./components/Loader";
+
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
@@ -14,16 +18,30 @@ import ScrollProgress from "./components/ScrollProgress";
 import BackToTop from "./components/BackToTop";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-slate-950 text-white">
-      {/* Animated Background */}
+      {/* Background */}
       <ParticlesBackground />
 
       {/* Scroll Progress */}
       <ScrollProgress />
 
       <div className="relative z-10">
-        {/* Navigation */}
+        {/* Navbar */}
         <Navbar />
 
         {/* Hero */}
