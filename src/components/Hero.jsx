@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import {
   FaGithub,
@@ -9,19 +10,54 @@ import {
 
 import profile from "../assets/images/Profile.png";
 
+const backgrounds = [
+  "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920",
+  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1920",
+  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1920",
+];
+
 function Hero() {
+  const [currentBg, setCurrentBg] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentBg((prev) => (prev + 1) % backgrounds.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden flex items-center bg-gradient-to-br from-[#020617] via-[#07152e] to-black pt-24"
+      className="relative min-h-screen overflow-hidden flex items-center pt-24"
     >
-      {/* Background Effects */}
+      {/* Animated Background */}
 
-      <div className="absolute -top-20 -left-20 w-[450px] h-[450px] bg-cyan-500/20 rounded-full blur-[170px] animate-pulse"></div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentBg}
+          initial={{ opacity: 0, scale: 1.15 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5 }}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${backgrounds[currentBg]})`,
+          }}
+        />
+      </AnimatePresence>
 
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[180px] animate-pulse"></div>
+      {/* Dark Overlay */}
 
-      <div className="absolute top-1/2 left-1/2 w-[650px] h-[650px] -translate-x-1/2 -translate-y-1/2 bg-cyan-500/5 blur-[230px] rounded-full"></div>
+      <div className="absolute inset-0 bg-slate-950/80"></div>
+
+      {/* Glow */}
+
+      <div className="absolute -top-24 -left-20 w-[450px] h-[450px] bg-cyan-500/20 blur-[170px] rounded-full animate-pulse"></div>
+
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/20 blur-[180px] rounded-full animate-pulse"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">
 
@@ -32,12 +68,11 @@ function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
-
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: .2 }}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400/30 bg-cyan-500/10 text-cyan-300"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400/30 bg-cyan-500/10 text-cyan-300 backdrop-blur-lg"
           >
             👋 Welcome To My Portfolio
           </motion.div>
@@ -54,10 +89,9 @@ function Hero() {
 
             <br />
 
-            <span className="text-white">
+            <span className="text-white drop-shadow-[0_0_30px_rgba(34,211,238,.5)]">
               Sajedul Islam
             </span>
-
           </motion.h1>
 
           <div className="mt-7 text-2xl md:text-3xl font-bold text-cyan-300">
@@ -83,14 +117,14 @@ function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: .8 }}
-            className="mt-8 max-w-xl text-lg text-slate-300 leading-9"
+            className="mt-8 max-w-xl text-lg text-slate-200 leading-9"
           >
-            Passionate Computer Science & Engineering student dedicated to
-            building beautiful websites, Flutter apps and scalable backend
-            systems using modern technologies.
+            Passionate Computer Science & Engineering student dedicated
+            to building beautiful websites, Flutter apps and scalable
+            backend systems using modern technologies.
           </motion.p>
-
-          {/* Buttons */}
+          
+                    {/* Buttons */}
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -101,7 +135,7 @@ function Hero() {
 
             <a
               href="#contact"
-              className="px-8 py-4 rounded-full bg-cyan-500 hover:bg-cyan-400 hover:scale-110 transition-all duration-500 shadow-[0_0_35px_#06b6d4]"
+              className="group px-8 py-4 rounded-full bg-cyan-500 font-semibold text-white hover:bg-cyan-400 hover:-translate-y-2 hover:scale-105 transition-all duration-500 shadow-[0_0_35px_#06b6d4]"
             >
               Contact Me
             </a>
@@ -109,14 +143,15 @@ function Hero() {
             <a
               href="/CV.pdf"
               download
-              className="px-8 py-4 rounded-full border border-cyan-400 flex items-center gap-3 backdrop-blur-lg bg-white/5 hover:bg-cyan-400 hover:text-black hover:scale-110 transition-all duration-500"
+              className="group px-8 py-4 rounded-full border border-cyan-400 bg-white/10 backdrop-blur-lg flex items-center gap-3 hover:bg-cyan-400 hover:text-black hover:-translate-y-2 hover:scale-105 transition-all duration-500 shadow-lg"
             >
-              <FaDownload />
+              <FaDownload className="group-hover:rotate-12 duration-300" />
               Download CV
             </a>
 
           </motion.div>
-                    {/* Social Icons */}
+
+          {/* Social Icons */}
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -124,11 +159,12 @@ function Hero() {
             transition={{ delay: 1.2 }}
             className="flex gap-5 mt-10"
           >
+
             <a
               href="https://github.com/emu2025222-spec"
               target="_blank"
               rel="noreferrer"
-              className="w-14 h-14 rounded-full bg-slate-900/80 border border-slate-700 flex items-center justify-center text-2xl hover:bg-cyan-500 hover:text-white hover:scale-110 hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_30px_#06b6d4]"
+              className="w-14 h-14 rounded-full bg-slate-900/70 backdrop-blur-xl border border-slate-700 flex items-center justify-center text-2xl hover:bg-cyan-500 hover:text-white hover:scale-110 hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_35px_#06b6d4]"
             >
               <FaGithub />
             </a>
@@ -137,7 +173,7 @@ function Hero() {
               href="https://www.facebook.com/profile.php?id=61591546110482"
               target="_blank"
               rel="noreferrer"
-              className="w-14 h-14 rounded-full bg-slate-900/80 border border-slate-700 flex items-center justify-center text-2xl hover:bg-cyan-500 hover:text-white hover:scale-110 hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_30px_#06b6d4]"
+              className="w-14 h-14 rounded-full bg-slate-900/70 backdrop-blur-xl border border-slate-700 flex items-center justify-center text-2xl hover:bg-cyan-500 hover:text-white hover:scale-110 hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_35px_#06b6d4]"
             >
               <FaFacebook />
             </a>
@@ -146,18 +182,19 @@ function Hero() {
               href="https://linkedin.com"
               target="_blank"
               rel="noreferrer"
-              className="w-14 h-14 rounded-full bg-slate-900/80 border border-slate-700 flex items-center justify-center text-2xl hover:bg-cyan-500 hover:text-white hover:scale-110 hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_30px_#06b6d4]"
+              className="w-14 h-14 rounded-full bg-slate-900/70 backdrop-blur-xl border border-slate-700 flex items-center justify-center text-2xl hover:bg-cyan-500 hover:text-white hover:scale-110 hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_35px_#06b6d4]"
             >
               <FaLinkedin />
             </a>
+
           </motion.div>
 
         </motion.div>
 
-        {/* RIGHT */}
+                {/* RIGHT */}
 
         <motion.div
-          initial={{ opacity: 0, scale: .6 }}
+          initial={{ opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
           className="flex justify-center"
@@ -172,7 +209,7 @@ function Hero() {
               ease: "easeInOut",
             }}
             whileHover={{
-              scale: 1.06,
+              scale: 1.08,
               rotate: 2,
             }}
             className="relative"
@@ -181,22 +218,33 @@ function Hero() {
 
             <div className="absolute inset-0 rounded-full bg-cyan-400 blur-[120px] opacity-40 animate-pulse"></div>
 
-            {/* Animated Ring */}
+            {/* Rotating Ring */}
+
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 15,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="absolute -inset-5 rounded-full border-2 border-dashed border-cyan-400/50"
+            />
+
+            {/* Ping Ring */}
 
             <div className="absolute inset-0 rounded-full border-2 border-cyan-400 opacity-30 animate-ping"></div>
 
             <img
               src={profile}
               alt="Profile"
-              className="relative w-80 h-80 lg:w-[430px] lg:h-[430px] rounded-full object-cover border-[7px] border-cyan-400 shadow-[0_0_90px_rgba(34,211,238,.8)] transition-all duration-700"
+              className="relative w-80 h-80 lg:w-[430px] lg:h-[430px] rounded-full object-cover border-[7px] border-cyan-400 shadow-[0_0_90px_rgba(34,211,238,.8)]"
             />
-
           </motion.div>
         </motion.div>
 
       </div>
 
-      {/* Scroll Down Indicator */}
+      {/* Scroll Down */}
 
       <motion.div
         animate={{
@@ -210,14 +258,22 @@ function Hero() {
       >
         <div className="w-7 h-12 rounded-full border-2 border-cyan-400 flex justify-center">
 
-          <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2"></div>
+          <motion.div
+            animate={{
+              y: [0, 18, 0],
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 1.2,
+            }}
+            className="w-2 h-2 bg-cyan-400 rounded-full mt-2"
+          />
 
         </div>
 
-        <p className="text-xs text-cyan-300 mt-2 text-center tracking-widest">
+        <p className="text-xs text-cyan-300 mt-2 text-center tracking-[5px]">
           SCROLL
         </p>
-
       </motion.div>
 
     </section>
