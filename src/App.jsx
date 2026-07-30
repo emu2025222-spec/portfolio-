@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Loader from "./components/Loader";
+import LoginModal from "./components/LoginModal";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -19,6 +20,7 @@ import BackToTop from "./components/BackToTop";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [showLogin, setShowLogin] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -34,13 +36,22 @@ function App() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-slate-950 text-white">
+
       {/* Background */}
       <ParticlesBackground />
 
       {/* Scroll Progress */}
       <ScrollProgress />
 
+      {/* Premium Login Popup */}
+      {showLogin && (
+        <LoginModal
+          onClose={() => setShowLogin(false)}
+        />
+      )}
+
       <div className="relative z-10">
+
         {/* Navbar */}
         <Navbar />
 
@@ -73,6 +84,7 @@ function App() {
 
         {/* Back To Top */}
         <BackToTop />
+
       </div>
     </div>
   );
